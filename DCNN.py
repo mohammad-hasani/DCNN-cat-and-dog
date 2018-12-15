@@ -31,6 +31,12 @@ class DCNN(object):
         self.IMG_COLS = 300
         self.IMG_CHANNELS = 1
 
+        rnd = np.arange(X.shape[0])
+        random.shuffle(rnd)
+        
+        X = X[rnd]
+        y = y[rnd]
+
 
         X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=testsize)
 
