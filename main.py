@@ -9,19 +9,24 @@ from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from keras.utils import np_utils
 import random
+import os
 
 
 def train_model_DCNN():
-    cats = ['./cats/cat.' + str(i) + '.jpg' for i in range(10, 20)]
-    dogs = ['./dogs/dog.' + str(i) + '.jpg' for i in range(50, 60)]
-    print(cats)
+    cats = list()
+    dogs = list()
+    for a1, a2, a3 in os.walk('cats'):
+        for i in a3:
+            cats.append('./cats/' + str(i))
+    for a1, a2, a3 in os.walk('dogs'):
+        for i in a3:
+            dogs.append('./dogs/' + str(i))
     X = list()
     Y = list()
     ROWS = 300
     COLS = 300
     for i in cats:
         image = cv2.imread(i, 0)
-        print(type(image))
         tmp = np.empty((ROWS, COLS))
         tmp[:, :] = 255
         end_rows = 0

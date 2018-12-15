@@ -85,14 +85,19 @@ class DCNN(object):
                             epochs=self.NB_EPOCH,
                             verbose=self.VERBOSE)
 
+        
         # y_predict = model.predict_classes(self.Y_test)
         # print(y_predict)
-        # # y_test = np.argmax(self.y_test, axis=1)
+        # y_test = np.argmax(self.y_test, axis=1)
         #
         # conv_matrix = confusion_matrix(self.Y_test, y_predict)
         # print(conv_matrix)
         #
-        # return model
+        self.X_test = self.X_test.reshape(self.X_test.shape[0], self.IMG_ROWS, self.IMG_COLS, 1)
+
+        score = model.evaluate(self.X_test, self.Y_test, batch_size=self.BATCH_SIZE, verbose=self.VERBOSE)
+        print(score)
+        return model
 
 
 
